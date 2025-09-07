@@ -9,6 +9,13 @@ services:
     networks:
       - webnet
 
+  web2:
+    image: nginx:latest
+    container_name: nginx-bk
+    ports:
+      - "9001:80"
+    networks:
+      -webnet
 networks:
   webnet:
     driver: bridge
