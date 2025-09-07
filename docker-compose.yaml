@@ -15,7 +15,7 @@ services:
     ports:
       - "9001:80"
     networks:
-      -webnet
+      - webnet
 networks:
   webnet:
     driver: bridge
