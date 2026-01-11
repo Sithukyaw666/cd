@@ -1,22 +1,33 @@
-version: '3.9'
+version: "3.9"
 
 services:
-  web:
-    image: nginx:latest
-    container_name: nginx_web
+  mongodb:
+    image: mongo:7
+    container_name: mongodb
+    restart: unless-stopped
     ports:
-      - "8001:80"
-    networks:
-      - webnet
+      - "27017:27017"
 
-  web2:
-    image: nginx:latest
-    container_name: nginx-bk
+  nodejs:
+    image: node:20-alpine
+    container_name: nodejs
+    restart: unless-stopped
+    depends_on:
+      - mongodb
     ports:
-      - "9001:80"
-    networks:
-      - webnet
-networks:
-  webnet:
-    driver: bridge
+      - "3000:3000"
+    command:
+      [
+        "node",
+        "-e",
+        "console.log('Node container running'); setInterval(() => {}, 1000);",
+      ]
 
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    restart: unless-stopped
+    depends_on:
+      - nodejs
+    ports:
+      - "80:80"
