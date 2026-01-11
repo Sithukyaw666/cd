@@ -1,26 +1,48 @@
 version: "3.9"
 
 services:
-  mongodb:
+  mongo1:
     image: mongo:7
-    container_name: mongodb
+    container_name: mongo1
     restart: unless-stopped
     ports:
       - "27017:27017"
 
-  nodejs:
+  mongo2:
+    image: mongo:7
+    container_name: mongo2
+    restart: unless-stopped
+    ports:
+      - "27018:27017"
+
+  nodejs1:
     image: node:20-alpine
-    container_name: nodejs
+    container_name: nodejs1
     restart: unless-stopped
     depends_on:
-      - mongodb
+      - mongo1
     ports:
-      - "3000:3000"
+      - "3001:3000"
     command:
       [
         "node",
         "-e",
-        "console.log('Node container running'); setInterval(() => {}, 1000);",
+        "console.log('NodeJS 1 running'); setInterval(() => {}, 1000);",
+      ]
+
+  nodejs2:
+    image: node:20-alpine
+    container_name: nodejs2
+    restart: unless-stopped
+    depends_on:
+      - mongo2
+    ports:
+      - "3002:3000"
+    command:
+      [
+        "node",
+        "-e",
+        "console.log('NodeJS 2 running'); setInterval(() => {}, 1000);",
       ]
 
   nginx:
@@ -28,14 +50,7 @@ services:
     container_name: nginx
     restart: unless-stopped
     depends_on:
-      - nodejs
+      - nodejs1
+      - nodejs2
     ports:
       - "8888:80"
-  nginx2:
-    image: nginx:alpine
-    container_name: nginx2
-    restart: unless-stopped
-    depends_on:
-      - nodejs
-    ports:
-      - "7777:80"
