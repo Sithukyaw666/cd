@@ -30,4 +30,12 @@ services:
     depends_on:
       - nodejs
     ports:
-      - "80:80"
+      - "8888:80"
+  nginx2:
+    image: nginx:alpine
+    container_name: nginx2
+    restart: unless-stopped
+    depends_on:
+      - nodejs
+    ports:
+      - "7777:80"
