@@ -8,13 +8,6 @@ services:
     ports:
       - "27017:27017"
 
-  mongo3:
-    image: mongo:7
-    container_name: mongo3
-    restart: unless-stopped
-    ports:
-      - "27019:27017"
-
   mongo2:
     image: mongo:7
     container_name: mongo2
