@@ -6,7 +6,7 @@ services:
     container_name: mongo1
     restart: unless-stopped
     ports:
-      - "27017:27017"
+      - "27019:27017"
 
   mongo2:
     image: mongo:7
