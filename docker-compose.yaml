@@ -8,13 +8,6 @@ services:
     ports:
       - "27019:27017"
 
-  mongo2:
-    image: mongo:7
-    container_name: mongo2
-    restart: unless-stopped
-    ports:
-      - "27018:27017"
-
   nodejs1:
     image: node:20-alpine
     container_name: nodejs1
@@ -34,8 +27,6 @@ services:
     image: node:20-alpine
     container_name: nodejs2
     restart: unless-stopped
-    depends_on:
-      - mongo2
     ports:
       - "3002:3000"
     command:
