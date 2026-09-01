@@ -13,12 +13,3 @@ services:
         "-e",
         "console.log('NodeJS 1 running'); setInterval(() => {}, 1000);",
       ]
-
-  nginx:
-    image: nginx:alpine
-    container_name: nginx
-    restart: unless-stopped
-    depends_on:
-      - nodejs1
-    ports:
-      - "8888:80"
