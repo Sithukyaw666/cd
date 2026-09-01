@@ -23,19 +23,6 @@ services:
         "console.log('NodeJS 1 running'); setInterval(() => {}, 1000);",
       ]
 
-  nodejs2:
-    image: node:20-alpine
-    container_name: nodejs2
-    restart: unless-stopped
-    ports:
-      - "3002:3000"
-    command:
-      [
-        "node",
-        "-e",
-        "console.log('NodeJS 2 running'); setInterval(() => {}, 1000);",
-      ]
-
   nginx:
     image: nginx:alpine
     container_name: nginx
