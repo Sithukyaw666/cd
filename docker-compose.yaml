@@ -29,6 +29,5 @@ services:
     restart: unless-stopped
     depends_on:
       - nodejs1
-      - nodejs2
     ports:
       - "8888:80"
