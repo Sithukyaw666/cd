@@ -23,3 +23,15 @@ services:
         "-e",
         "console.log('NodeJS 2 running'); setInterval(() => {}, 1000);",
       ]
+  nodejs3:
+    image: node:20-alpine
+    container_name: nodejs3
+    restart: unless-stopped
+    ports:
+      - "3005:3000"
+    command:
+      [
+        "node",
+        "-e",
+        "console.log('NodeJS 3 running'); setInterval(() => {}, 1000);",
+      ]
