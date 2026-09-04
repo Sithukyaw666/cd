@@ -12,7 +12,7 @@ services:
         "console.log('NodeJS 1 running'); setInterval(() => {}, 1000);",
       ]
 
-  nodejs1:
+  nodejs3:
     image: node:20-alpine
     container_name: nodejs3
     restart: unless-stopped
