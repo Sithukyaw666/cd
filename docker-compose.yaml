@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   nodejs1:
     image: node:20-alpine
@@ -12,4 +10,16 @@ services:
         "node",
         "-e",
         "console.log('NodeJS 1 running'); setInterval(() => {}, 1000);",
+      ]
+  nodejs2:
+    image: node:20-alpine
+    container_name: nodejs2
+    restart: unless-stopped
+    ports:
+      - "3003:3000"
+    command:
+      [
+        "node",
+        "-e",
+        "console.log('NodeJS 2 running'); setInterval(() => {}, 1000);",
       ]
